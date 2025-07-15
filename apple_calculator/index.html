@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Apple風計算機</title>
+  <style>
+    /* 固定左上角返回按钮 */
+    .back {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 100;
+    }
+
+    #btn99 {
+      padding: 0.5em 1em;
+      border-radius: 0.3em;
+      color: whitesmoke;
+      font-size: 1.2em;
+      background: rgb(26, 212, 212);
+      cursor: pointer;
+      border: none;
+      text-decoration: none;
+    }
+
+    body {
+      background-color: #000;
+      font-family: "San Francisco", "Helvetica Neue", sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .calculator {
+      width: 300px;
+      background-color: #1c1c1c;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 0 10px #000;
+    }
+
+    .display {
+      background-color: #000;
+      color: white;
+      text-align: right;
+      padding: 20px;
+      font-size: 2.5em;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      overflow-x: auto;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .btn {
+      font-size: 1.5em;
+      padding: 20px;
+      border: none;
+      border-radius: 50%;
+      background-color: #333;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .btn.operator {
+      background-color: #ff9500;
+    }
+
+    .btn.clear {
+      background-color: #a5a5a5;
+      color: black;
+    }
+
+    .btn.zero {
+      grid-column: span 2;
+      border-radius: 40px;
+      text-align: left;
+      padding-left: 30px;
+    }
+
+    .btn:active {
+      background-color: #666;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- 🔙 固定在左上角的返回按钮 -->
+  <div class="back">
+    <button id="btn99" class="btn" type="button" onclick="history.back()">← Back</button>
+  </div>
+
+  <!-- 🧮 计算器主界面 -->
+  <div class="calculator">
+    <div class="display" id="display">0</div>
+    <div class="buttons">
+      <button class="btn clear" onclick="clearDisplay()">AC</button>
+      <button class="btn" onclick="append('%')">%</button>
+      <button class="btn" onclick="append('/')">÷</button>
+      <button class="btn operator" onclick="append('*')">×</button>
+
+      <button class="btn" onclick="append('7')">7</button>
+      <button class="btn" onclick="append('8')">8</button>
+      <button class="btn" onclick="append('9')">9</button>
+      <button class="btn operator" onclick="append('-')">−</button>
+
+      <button class="btn" onclick="append('4')">4</button>
+      <button class="btn" onclick="append('5')">5</button>
+      <button class="btn" onclick="append('6')">6</button>
+      <button class="btn operator" onclick="append('+')">＋</button>
+
+      <button class="btn" onclick="append('1')">1</button>
+      <button class="btn" onclick="append('2')">2</button>
+      <button class="btn" onclick="append('3')">3</button>
+      <button class="btn operator" onclick="calculate()">＝</button>
+
+      <button class="btn zero" onclick="append('0')">0</button>
+      <button class="btn" onclick="append('.')">.</button>
+    </div>
+  </div>
+
+  <!-- ✨ 计算逻辑 -->
+  <script>
+    let display = document.getElementById('display');
+
+    function append(value) {
+      if (display.textContent === '0' || display.textContent === 'Error') {
+        display.textContent = value;
+      } else {
+        display.textContent += value;
+      }
+    }
+
+    function clearDisplay() {
+      display.textContent = '0';
+    }
+
+    function calculate() {
+      try {
+        display.textContent = eval(display.textContent.replace(/÷/g, '/').replace(/×/g, '*'));
+      } catch {
+        display.textContent = 'Error';
+      }
+    }
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+@charset "utf-8";
+
+html {
+    /* ブラウザのデフォルトが16px                        */
+    /* デフォルトの16pxの代わりに1emが10pxになるように調整 */
+    font-size: 62.5%;
+}
+
+/* 「*」はユニバーサルセレクタ（すべての要素を対象にするセレクタ）でbox-sizing: border-box;を指定 */
+/* この指定（してい）はborderとpaddingをボックスサイズ（widthとheight）の中に含めて算出するので、スタイリングがしやすい*/
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+.back {
+  text-align: left;
+}
+
+#btn99 {
+  padding: 0.5em;
+  border-radius: 0.3em;
+  color: whitesmoke;
+  font-size: 1.5em;
+  background: rgb(26, 212, 212);
+  cursor: pointer;
+}

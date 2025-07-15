@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <body>
+    <div class="back">
+      <button id="btn99" class="btn" type="button" onclick="history.back()">back</button>
+    </div>
+  <meta charset="UTF-8">
+  <title>計算機1</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    input[type="number"], select {
+      padding: 5px;
+      font-size: 1em;
+      margin: 10px;
+    }
+    button {
+      padding: 5px 15px;
+      font-size: 1em;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 1.2em;
+      color: darkblue;
+    }
+  </style>
+</head>
+<body>
+  <h1>簡単な計算機</h1>
+
+  <input type="number" id="num1" placeholder="数字1">
+  <select id="operator">
+    <option value="+">＋</option>
+    <option value="-">－</option>
+    <option value="*">×</option>
+    <option value="/">÷</option>
+  </select>
+  <input type="number" id="num2" placeholder="数字2">
+  <button onclick="calculate()">計算</button>
+  <div id="result"></div>
+  <style>
+    
+    .back {
+      width: 100%;
+      text-align: left;
+      padding: 1em;
+    }
+
+    #btn99 {
+      padding: 0.5em 1em;
+      border-radius: 0.3em;
+      color: whitesmoke;
+      font-size: 1.2em;
+      background: rgb(26, 212, 212);
+      cursor: pointer;
+      border: none;
+      text-decoration: none;
+    }
+  </style>
+  <script>
+    
+    function calculate() {
+      const num1 = parseFloat(document.getElementById("num1").value);
+      const num2 = parseFloat(document.getElementById("num2").value);
+      const operator = document.getElementById("operator").value;
+      let result;
+
+      if (isNaN(num1) || isNaN(num2)) {
+        result = "数字を正しく入力してください";
+      } else {
+        switch (operator) {
+          case '+': result = num1 + num2; break;
+          case '-': result = num1 - num2; break;
+          case '*': result = num1 * num2; break;
+          case '/': 
+            if (num2 === 0) {
+              result = "0で割ることはできません";
+            } else {
+              result = num1 / num2;
+            }
+            break;
+        }
+      }
+
+      document.getElementById("result").innerText = "結果: " + result;
+    }
+  </script>
+</body>
+</html>

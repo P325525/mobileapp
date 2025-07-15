@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <body>
+    <div class="back">
+      <button id="btn99" class="btn" type="button" onclick="history.back()">back</button>
+    </div>
+  <meta charset="UTF-8">
+  <title>精巧な計算機</title>
+  <style>
+    
+    body {
+      background-color: #222;
+      font-family: 'Segoe UI', sans-serif;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .back {
+      width: 100%;
+      text-align: left;
+      padding: 1em;
+    }
+
+    #btn99 {
+      padding: 0.5em 1em;
+      border-radius: 0.3em;
+      color: whitesmoke;
+      font-size: 1.2em;
+      background: rgb(26, 212, 212);
+      cursor: pointer;
+      border: none;
+      text-decoration: none;
+    }
+
+    .calculator {
+      background-color: #333;
+      padding: 20px;
+      border-radius: 16px;
+      margin-top: 20px;
+      width: 300px;
+      box-shadow: 0 0 10px #000;
+    }
+
+    .display {
+      background-color: #000;
+      color: #0ff;
+      text-align: right;
+      padding: 15px;
+      font-size: 2em;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      overflow-x: auto;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .btn {
+      background-color: #555;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 20px;
+      font-size: 1.2em;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .btn:hover {
+      background-color: #777;
+    }
+
+    .btn.operator {
+      background-color: #ff9500;
+    }
+
+    .btn.zero {
+      grid-column: span 2;
+    }
+  </style>
+</head>
+
+
+  <!-- 🧮 计算器 -->
+  <div class="calculator">
+    <div class="display" id="display">0</div>
+    <div class="buttons">
+      <button class="btn" onclick="append('7')">7</button>
+      <button class="btn" onclick="append('8')">8</button>
+      <button class="btn" onclick="append('9')">9</button>
+      <button class="btn operator" onclick="append('/')">÷</button>
+
+      <button class="btn" onclick="append('4')">4</button>
+      <button class="btn" onclick="append('5')">5</button>
+      <button class="btn" onclick="append('6')">6</button>
+      <button class="btn operator" onclick="append('*')">×</button>
+
+      <button class="btn" onclick="append('1')">1</button>
+      <button class="btn" onclick="append('2')">2</button>
+      <button class="btn" onclick="append('3')">3</button>
+      <button class="btn operator" onclick="append('-')">−</button>
+
+      <button class="btn zero" onclick="append('0')">0</button>
+      <button class="btn" onclick="append('.')">.</button>
+      <button class="btn operator" onclick="calculate()">＝</button>
+      <button class="btn operator" onclick="append('+')">＋</button>
+
+      <button class="btn" onclick="clearDisplay()">AC</button>
+    </div>
+  </div>
+
+  <!-- 🔁 返回逻辑 -->
+  <script>
+    function goBack() {
+      if (document.referrer && document.referrer !== location.href) {
+        history.back();
+      } else {
+        // 如果没有上一页，跳转到首页
+        window.location.href = "index.html";
+      }
+    }
+
+    let display = document.getElementById('display');
+
+    function append(value) {
+      if (display.textContent === '0' || display.textContent === 'Error') {
+        display.textContent = value;
+      } else {
+        display.textContent += value;
+      }
+    }
+
+    function clearDisplay() {
+      display.textContent = '0';
+    }
+
+    function calculate() {
+      try {
+        display.textContent = eval(display.textContent);
+      } catch {
+        display.textContent = 'Error';
+      }
+    }
+  </script>
+
+</body>
+</html>
